@@ -3,7 +3,7 @@ import pandas as pd
 #import joblib
 
 df = pd.read_csv("diamonds.csv")
-st.title("Diamond cost predictor")
+st.title("Diamond💎 cost predictor")
 carat = st.slider("Carat or weight of the diamond", 0.2, 6.0, step=0.1)
 cut = st.selectbox("Quality of the cut", ["Fair", "Good", "Very Good", "Premium", "Ideal"])
 color = st.selectbox("Diamond colour from best(D) to worst(J)", ["D", "E", "F", "G", "H", "I", "J"])
