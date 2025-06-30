@@ -21,8 +21,8 @@ width_of_top_of_diamond = st.slider("Width of top of diamond relative to widest 
 
 
 #model, model_columns = joblib.load()
-inputs_frame = pd.DataFrame([{"carat":carat, "cut":cut, "color":color, "clarity":clarity, "x":length_x, "y":width_y, "z":depth_z, "depth":total_depth, "table":width_of_top_of_diamond  }])
-new_dataset = pd.concat([inputs_frame,df], axis=0)
+#inputs_frame = pd.DataFrame([{"carat":carat, "cut":cut, "color":color, "clarity":clarity, "x":length_x, "y":width_y, "z":depth_z, "depth":total_depth, "table":width_of_top_of_diamond  }])
+#new_dataset = pd.concat([inputs_frame,df], axis=0)
 #for col in model_columns:
 #   if col not in inputs_frame:
 #      inputs_frame[col] = 0
