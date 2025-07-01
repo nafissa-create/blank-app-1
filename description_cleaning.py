@@ -54,3 +54,5 @@ print(df.isnull().sum())
 #z             0
 #dtype: int64
 
+print(df.dtypes)
+df_encoded = pd.get_dummies(df, columns =["cut", "color" , "clarity"], drop_first=True)
