@@ -1,6 +1,10 @@
 import streamlit as st
 import pandas as pd
-#import joblib
+import joblib
+
+model = joblib.load("linear_model.pkl")
+model_columns = joblib.load("model_columns.pkl")
+
 
 df = pd.read_csv("diamonds.csv")
 st.title("Diamond💎 cost predictor")
@@ -23,6 +27,8 @@ width_of_top_of_diamond = st.slider("Width of top of diamond relative to widest 
 #model, model_columns = joblib.load()
 inputs_frame = pd.DataFrame([{"carat":carat, "cut":cut, "color":color, "clarity":clarity, "x":length_x, "y":width_y, "z":depth_z, "depth":total_depth, "table":width_of_top_of_diamond  }])
 new_dataset = pd.concat([inputs_frame,df], axis=0)
+encoded_input = pd.get_dummies(inputs_frame, columns=["cut", "color", "clarity"], drop_first=True)
+encoded_input = encoded_input.reindex(columns=model_columns, fill_value=0)
 #for col in model_columns:
 #   if col not in inputs_frame:
 #      inputs_frame[col] = 0
@@ -31,9 +37,9 @@ currency_rates = {"USD":1, "EUR":0.85, "RUB":78.52 , "KES":129.32,"BWP":13.35 ,"
 currency = st.selectbox("Choose your preferred currency", list(currency_rates.keys()))
 
 if st.button("Generate predicted diamond price"):
-#  predicted_price_in_USD = model.predict(inputs_frame)[0]
-#  converted_price = predicted_price_in_USD * currency_rates[currency]
-  st.write(f"The diamond price is estimated to:")
+  predicted_price_in_USD = model.predict(encoded_input)[0]
+  converted_price = predicted_price_in_USD * currency_rates[currency]
+  st.write(f"The diamond price is estimated to: {converted_price:.2f}{currency}")
 
 st.markdown(
     f"""
