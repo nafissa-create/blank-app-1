@@ -29,10 +29,6 @@ inputs_frame = pd.DataFrame([{"carat":carat, "cut":cut, "color":color, "clarity"
 new_dataset = pd.concat([inputs_frame,df], axis=0)
 encoded_input = pd.get_dummies(inputs_frame, columns=["cut", "color", "clarity"], drop_first=True)
 encoded_input = encoded_input.reindex(columns=model_columns, fill_value=0)
-#for col in model_columns:
-#   if col not in inputs_frame:
-#      inputs_frame[col] = 0
-#inputs_frame = inputs_frame[model_columns]
 currency_rates = {"USD":1, "EUR":0.85, "RUB":78.52 , "KES":129.32,"BWP":13.35 ,"CAD":1.37 , "AOA":914.48 , "CDF":2876, "ZAR":18, "CNY":7.17, "INR":85.5, "JPY": 144.65, "AED":3.67,"GBP":0.73}
 currency = st.selectbox("Choose your preferred currency", list(currency_rates.keys()))
 
