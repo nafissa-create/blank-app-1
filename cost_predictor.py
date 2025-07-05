@@ -38,7 +38,7 @@ st.set_page_config(layout="wide")
 def set_bg_image(image_file):
    with open (image_file, "rb") as img_file:
       img_bytes = img_file.read()
-   encoded = base64.b64encode(img_bytes).decode()
+      encoded = base64.b64encode(img_bytes).decode()
 st.markdown(
     f"""
     <style>
