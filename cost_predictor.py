@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import base64
 
 model = joblib.load("linear_model.pkl")
 model_columns = joblib.load("model_columns.pkl")
@@ -21,10 +22,6 @@ if (length_x + width_y) > 0:
    total_depth = (2*depth_z)/(length_x + width_y)
    st.write(f"Total depth percentage is {total_depth:.4f}")
 width_of_top_of_diamond = st.slider("Width of top of diamond relative to widest point", 40.0, 100.0, step=0.1)
-
-
-
-#model, model_columns = joblib.load()
 inputs_frame = pd.DataFrame([{"carat":carat, "cut":cut, "color":color, "clarity":clarity, "x":length_x, "y":width_y, "z":depth_z, "depth":total_depth, "table":width_of_top_of_diamond  }])
 new_dataset = pd.concat([inputs_frame,df], axis=0)
 encoded_input = pd.get_dummies(inputs_frame, columns=["cut", "color", "clarity"], drop_first=True)
@@ -37,16 +34,22 @@ if st.button("Generate predicted diamond price"):
   converted_price = predicted_price_in_USD * currency_rates[currency]
   st.write(f"The diamond price is estimated to: {converted_price:.2f}{currency}")
 
+st.set_page_config(layout="wide")
+def set_bg_image(image_file):
+   with open (image_file, "rb") as img_file:
+      img_bytes = img_file.read()
+   encoded = base64.b64encode(img_bytes).decode()
 st.markdown(
     f"""
     <style>
     .stApp {{
-        background-image: url("https://www.transparenttextures.com/patterns/diamond-upholstery.png");
+        background-image: url("data:image/jpeg;base64,{encoded}");
         background-size: cover;
         background-repeat: no-repeat;
-        background-attachment: fixed;
+        background-position: center;
     }}
     </style>
     """,
     unsafe_allow_html=True
 )
+set_bg_image("diamond_bg.jpg")
