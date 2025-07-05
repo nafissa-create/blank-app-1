@@ -3,6 +3,28 @@ import pandas as pd
 import joblib
 import base64
 
+st.set_page_config(layout="wide")
+def set_bg_image(image_file, brightness = 0.3):
+   with open (image_file, "rb") as img_file:
+      img_bytes = img_file.read()
+   encoded = base64.b64encode(img_bytes).decode()
+   st.markdown(
+       f"""
+       <style>
+       .stApp {{
+           background-image: url("data:image/jpeg;base64,{encoded}");
+           background-size: cover;
+           background-repeat: no-repeat;
+           background-position: center;
+           filter: brightness (0.3),
+
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+    )
+set_bg_image("diamond_bg.jpg")
+
 model = joblib.load("linear_model.pkl")
 model_columns = joblib.load("model_columns.pkl")
 
@@ -34,22 +56,4 @@ if st.button("Generate predicted diamond price"):
   converted_price = predicted_price_in_USD * currency_rates[currency]
   st.write(f"The diamond price is estimated to: {converted_price:.2f}{currency}")
 
-st.set_page_config(layout="wide")
-def set_bg_image(image_file):
-   with open (image_file, "rb") as img_file:
-      img_bytes = img_file.read()
-      encoded = base64.b64encode(img_bytes).decode()
-st.markdown(
-    f"""
-    <style>
-    .stApp {{
-        background-image: url("data:image/jpeg;base64,{encoded}");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-    }}
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-set_bg_image("diamond_bg.jpg")
+
