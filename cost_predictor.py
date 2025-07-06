@@ -15,7 +15,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
     )
-set_bg_image("diamond_bg.jpg")
 
 model = joblib.load("linear_model.pkl")
 model_columns = joblib.load("model_columns.pkl")
