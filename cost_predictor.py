@@ -1,23 +1,15 @@
 import streamlit as st
 import pandas as pd
 import joblib
-import base64
 
-st.set_page_config(layout="wide")
-def set_bg_image(image_file, brightness = 0.3):
-   with open (image_file, "rb") as img_file:
-      img_bytes = img_file.read()
-   encoded = base64.b64encode(img_bytes).decode()
-   st.markdown(
+st.markdown(
        f"""
        <style>
        .stApp {{
-           background-image: url("data:image/jpeg;base64,{encoded}");
+           background-image: url("https://www.transparenttextures.com/patterns/diamond-upholstery.png");
            background-size: cover;
            background-repeat: no-repeat;
            background-position: center;
-           filter: brightness (0.3),
-
     }}
     </style>
     """,
