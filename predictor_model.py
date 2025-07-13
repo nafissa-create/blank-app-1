@@ -5,10 +5,10 @@ df = pd.read_csv("diamonds.csv")
 #see the number of rows and columns
 print(df.shape)
 #define the variables x and y for the linear regression model
-x = df[["carat", "cut","color","clarity","table"]]
+x = df[["carat","clarity","table"]]
 y = df["price"]
 #convert categoriel variables into numeric
-x = pd.get_dummies(x, columns = ["cut", "color", "clarity"], drop_first = True)
+x = pd.get_dummies(x, columns = ["clarity"], drop_first = True)
 print(x.columns)
 print(df['clarity'].unique())
 
